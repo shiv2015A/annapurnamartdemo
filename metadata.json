@@ -1,0 +1,5 @@
+{
+  "name": "Annapurna Mart",
+  "description": "A grocery store website with phone authentication and an admin panel for managing products.",
+  "requestFramePermissions": []
+}

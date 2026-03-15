@@ -1,0 +1,133 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "A grocery product available in the store",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the product"
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed description of the product"
+        },
+        "price": {
+          "type": "number",
+          "description": "The price of the product"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL of the product image"
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the product (e.g., Fruits, Vegetables, Dairy)"
+        },
+        "stock": {
+          "type": "number",
+          "description": "The number of items in stock"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the product was added"
+        }
+      },
+      "required": ["name", "price", "category", "stock"]
+    },
+    "User": {
+      "title": "User",
+      "description": "A user of the application",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "The user's email address"
+        },
+        "name": {
+          "type": "string",
+          "description": "The user's display name"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin", "customer"],
+          "description": "The role of the user"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the user account was created"
+        }
+      },
+      "required": ["email", "role"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A customer order",
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "description": "Unique identifier for the order"
+        },
+        "items": {
+          "type": "array",
+          "description": "List of items in the order"
+        },
+        "totalPrice": {
+          "type": "number",
+          "description": "Total price of the order"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Customer phone number"
+        },
+        "address": {
+          "type": "string",
+          "description": "Delivery address"
+        },
+        "gps": {
+          "type": "string",
+          "description": "GPS coordinates"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Pending", "Processing", "Shipped", "Delivered", "Cancelled"],
+          "description": "Current status of the order"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the order was placed"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user who placed the order (optional)"
+        }
+      },
+      "required": ["orderId", "items", "totalPrice", "phone", "address", "status"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": {
+        "$ref": "#/entities/Product"
+      },
+      "description": "Collection of products"
+    },
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/User"
+      },
+      "description": "Collection of users"
+    },
+    "/orders/{orderId}": {
+      "schema": {
+        "$ref": "#/entities/Order"
+      },
+      "description": "Collection of orders"
+    }
+  }
+}
